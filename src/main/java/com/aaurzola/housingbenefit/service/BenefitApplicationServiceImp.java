@@ -1,5 +1,6 @@
 package com.aaurzola.housingbenefit.service;
 
+import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.applicationRequestDTO;
 import com.aaurzola.housingbenefit.model.BenefitApplication;
 import com.aaurzola.housingbenefit.repository.BenefitApplicationRepository;
@@ -38,5 +39,10 @@ public class BenefitApplicationServiceImp implements BenefitApplicationService{
 //        repository.submitBenefitRequest(savedApplication.getId());
 //        return the updated record
         return repository.findById(savedApplication.getId()).orElse(null);
+    }
+
+    @Override
+    public List<RequesterDetailDTO> getApplicationRequester(Long applicationId) {
+        return repository.findRequesterByApplicationId(applicationId);
     }
 }

@@ -1,5 +1,6 @@
 package com.aaurzola.housingbenefit.controller;
 
+import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.applicationRequestDTO;
 import com.aaurzola.housingbenefit.exception.ResourceNotFoundException;
 import com.aaurzola.housingbenefit.model.BenefitApplication;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("benefitApplication")
 public class BenefitApplicationController {
 
@@ -33,8 +35,13 @@ public class BenefitApplicationController {
         if (benefitApplication != null) {
             return ResponseEntity.status(HttpStatus.OK).body(benefitApplication);
         } else {
-            throw new ResourceNotFoundException("Aplicacion", applicationId);
+            throw new ResourceNotFoundException("Solicitud", applicationId);
         }
+    }
+
+    @GetMapping("requesterDetails/{requestId}")
+    public ResponseEntity<List<RequesterDetailDTO>> getRequesterDetail(@PathVariable Long requestId) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getApplicationRequester(requestId));
     }
 
     @PostMapping()

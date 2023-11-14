@@ -34,9 +34,9 @@ public class BenefitApplication implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "BENEFIT_TYPE_ID", referencedColumnName = "ID")
-    private BenefitType benefitTypeId;
+    private BenefitType benefitType;
 
     @Column(name = "HOUSING_TYPE_ID")
-    private String housingTypeId;
+    private String housingType;
 
 }
