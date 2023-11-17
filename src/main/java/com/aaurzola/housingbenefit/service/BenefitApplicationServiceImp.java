@@ -1,7 +1,7 @@
 package com.aaurzola.housingbenefit.service;
 
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
-import com.aaurzola.housingbenefit.dto.applicationRequestDTO;
+import com.aaurzola.housingbenefit.dto.ApplicationRequestDTO;
 import com.aaurzola.housingbenefit.model.BenefitApplication;
 import com.aaurzola.housingbenefit.repository.BenefitApplicationRepository;
 import com.aaurzola.housingbenefit.repository.RequestorJDBC;
@@ -33,9 +33,9 @@ public class BenefitApplicationServiceImp implements BenefitApplicationService{
     }
 
     @Override
-    public BenefitApplication SubmitApplication(applicationRequestDTO applicationRequest) {
+    public BenefitApplication submitApplication(ApplicationRequestDTO applicationRequest) {
         BenefitApplication savedApplication = repository.save(applicationRequest.getApplication());
-        requestorJDBC.assignIndividualToRequest(applicationRequest);
+        requestorJDBC.assignIndividualToRequest(applicationRequest.getApplication().getId(), applicationRequest.getRequesters());
 //        repository.submitBenefitRequest(savedApplication.getId());
 //        return the updated record
         return repository.findById(savedApplication.getId()).orElse(null);

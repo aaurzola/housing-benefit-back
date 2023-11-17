@@ -1,6 +1,5 @@
 package com.aaurzola.housingbenefit.repository;
 
-import com.aaurzola.housingbenefit.dto.applicationRequestDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +7,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 @Component
 public class RequestorJDBC {
@@ -21,14 +21,15 @@ public class RequestorJDBC {
     private String password;
 
 
-    public void assignIndividualToRequest(applicationRequestDTO applicationRequest) {
-        try(Connection conn = DriverManager.getConnection(databasebUrl, user, password)) {
-            for (Long personId: applicationRequest.getRequesters()) {
-                CallableStatement stmt = conn.prepareCall("CALL APP_SUBSIDIOS_VIVIENDA.HOUSING_SUBSIDY.ASSIGN_REQUESTER(?, ?)");
+    public void assignIndividualToRequest(Long applicationId, List<Long> requesters) {
+        try (
+                Connection conn = DriverManager.getConnection(databasebUrl, user, password);
+                CallableStatement stmt = conn.prepareCall("CALL APP_SUBSIDIOS_VIVIENDA.HOUSING_SUBSIDY.ASSIGN_REQUESTER(?, ?)")
+        ) {
+            for (Long personId: requesters) {
                 stmt.setLong(1, personId);
-                stmt.setLong(2, applicationRequest.getApplication().getId());
+                stmt.setLong(2, applicationId);
                 stmt.execute();
-                stmt.close();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

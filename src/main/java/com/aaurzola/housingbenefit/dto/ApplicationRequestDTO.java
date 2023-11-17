@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class applicationRequestDTO {
+public class ApplicationRequestDTO {
     private BenefitApplication application;
     private List<Long> requesters;
 }
