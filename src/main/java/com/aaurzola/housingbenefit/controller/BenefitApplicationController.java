@@ -1,7 +1,7 @@
 package com.aaurzola.housingbenefit.controller;
 
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
-import com.aaurzola.housingbenefit.dto.applicationRequestDTO;
+import com.aaurzola.housingbenefit.dto.ApplicationRequestDTO;
 import com.aaurzola.housingbenefit.exception.ResourceNotFoundException;
 import com.aaurzola.housingbenefit.model.BenefitApplication;
 import com.aaurzola.housingbenefit.service.BenefitApplicationService;
@@ -45,7 +45,7 @@ public class BenefitApplicationController {
     }
 
     @PostMapping()
-    public ResponseEntity<BenefitApplication> submitApplication(@RequestBody applicationRequestDTO application) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.SubmitApplication(application));
+    public ResponseEntity<BenefitApplication> submitApplication(@RequestBody ApplicationRequestDTO application) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.submitApplication(application));
     }
 }
