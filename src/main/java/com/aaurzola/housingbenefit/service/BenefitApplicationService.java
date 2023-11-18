@@ -10,7 +10,7 @@ public interface BenefitApplicationService {
 
     List<BenefitApplication> getAllApplications();
     BenefitApplication getBenefitApplicationById(Long applicationId);
-    BenefitApplication submitApplication(ApplicationRequestDTO application);
+    Long submitApplication(ApplicationRequestDTO application);
     List<RequesterDetailDTO> getApplicationRequester(Long applicationId);
 
 }

@@ -29,6 +29,7 @@ public class BenefitApplicationController {
         return ResponseEntity.ok(service.getAllApplications());
     }
 
+    //TODO: Refact method
     @GetMapping("{applicationId}")
     public ResponseEntity<BenefitApplication> getApplicationById(@PathVariable Long applicationId) {
         BenefitApplication benefitApplication = service.getBenefitApplicationById(applicationId);
@@ -45,7 +46,7 @@ public class BenefitApplicationController {
     }
 
     @PostMapping()
-    public ResponseEntity<BenefitApplication> submitApplication(@RequestBody ApplicationRequestDTO application) {
+    public ResponseEntity<Long> submitApplication(@RequestBody ApplicationRequestDTO application) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.submitApplication(application));
     }
 }

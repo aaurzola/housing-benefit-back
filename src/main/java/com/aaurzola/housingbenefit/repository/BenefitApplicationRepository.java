@@ -16,8 +16,8 @@ public interface BenefitApplicationRepository extends JpaRepository<BenefitAppli
     @Query(value = "SELECT b FROM BenefitApplication b")
     List<BenefitApplication> findAllApplications();
 
-    @Procedure("HOUSING_SUBSIDY.SUBMIT_BENEFIT_REQUEST")
-    void submitBenefitRequest(Long benefitApplicationId);
+    @Procedure("HOUSING_SUBSIDY.ASSIGN_BENEFIT_TO_REQUEST")
+    void assignBenefitToRequest(Long requestId);
 
 
     @Query(value = "SELECT i.ID AS \"id\", i.FIRST_NAME AS \"firstName\", i.LAST_NAME AS \"lastName\", i.EMAIL AS \"email\", i.PHONE_NUMBER AS \"phoneNumber\",\n" +

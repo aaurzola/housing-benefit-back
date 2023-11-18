@@ -29,12 +29,8 @@ public class BenefitApplication implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
 
-    @Column(name = "IS_APPROVED", insertable = false, columnDefinition = "CHAR(1) DEFAULT 'N'")
-    private Character isApproved = 'N';
-
-    @ManyToOne()
-    @JoinColumn(name = "BENEFIT_TYPE_ID", referencedColumnName = "ID")
-    private BenefitType benefitType;
+    @Column(name = "IS_APPROVED")
+    private Character isApproved;
 
     @Column(name = "HOUSING_TYPE_ID")
     private String housingType;

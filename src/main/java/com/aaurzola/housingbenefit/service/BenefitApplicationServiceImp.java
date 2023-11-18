@@ -2,6 +2,7 @@ package com.aaurzola.housingbenefit.service;
 
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.ApplicationRequestDTO;
+import com.aaurzola.housingbenefit.exception.ApplicationSubmissionException;
 import com.aaurzola.housingbenefit.model.BenefitApplication;
 import com.aaurzola.housingbenefit.repository.BenefitApplicationRepository;
 import com.aaurzola.housingbenefit.repository.RequestorJDBC;
@@ -33,16 +34,20 @@ public class BenefitApplicationServiceImp implements BenefitApplicationService{
     }
 
     @Override
-    public BenefitApplication submitApplication(ApplicationRequestDTO applicationRequest) {
-        BenefitApplication savedApplication = repository.save(applicationRequest.getApplication());
-        requestorJDBC.assignIndividualToRequest(applicationRequest.getApplication().getId(), applicationRequest.getRequesters());
-//        repository.submitBenefitRequest(savedApplication.getId());
-//        return the updated record
-        return repository.findById(savedApplication.getId()).orElse(null);
+    public Long submitApplication(ApplicationRequestDTO applicationRequest) {
+        try {
+            BenefitApplication savedRequest = repository.save(applicationRequest.getApplication());
+            requestorJDBC.assignIndividualToRequest(savedRequest.getId(), applicationRequest.getRequesters());
+            repository.assignBenefitToRequest(savedRequest.getId());
+            return savedRequest.getId();
+        } catch (Exception e) {
+            throw new ApplicationSubmissionException();
+        }
     }
 
     @Override
     public List<RequesterDetailDTO> getApplicationRequester(Long applicationId) {
         return repository.findRequesterByApplicationId(applicationId);
     }
+
 }
