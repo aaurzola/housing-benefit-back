@@ -1,6 +1,7 @@
 package com.aaurzola.housingbenefit.validation;
 
 
+import com.aaurzola.housingbenefit.exception.ResourceNotFoundException;
 import com.aaurzola.housingbenefit.repository.BenefitApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,9 @@ public class RequestValidator {
         this.benefitApplicationRepository = benefitApplicationRepository;
     }
 
-    public Boolean existsRequestId(Long requestId) {
-        return benefitApplicationRepository.existsById(requestId);
+    public void assertRequestIdExists(Long requestId) {
+        if (!benefitApplicationRepository.existsById(requestId)) {
+            throw new ResourceNotFoundException("Solicitud", requestId);
+        }
     }
 }

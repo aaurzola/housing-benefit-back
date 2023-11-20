@@ -23,11 +23,7 @@ public class BenefitServiceImp implements BenefitService {
 
     @Override
     public List<Benefit> findBenefitDetails(Long requestId) {
-        if (validator.existsRequestId(requestId)) {
-            return benefitRepository.findAllByBenefitApplicationId(requestId);
-
-        } else {
-            throw new ResourceNotFoundException("Solicitud", requestId);
-        }
+        validator.assertRequestIdExists(requestId);
+        return benefitRepository.findAllByBenefitApplicationId(requestId);
     }
 }
