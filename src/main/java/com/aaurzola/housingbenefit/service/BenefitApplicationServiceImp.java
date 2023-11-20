@@ -35,9 +35,11 @@ public class BenefitApplicationServiceImp implements BenefitApplicationService{
 
     @Override
     public Long submitApplication(ApplicationRequestDTO applicationRequest) {
+        //validate person id
         try {
             BenefitApplication savedRequest = repository.save(applicationRequest.getApplication());
             requestorJDBC.assignIndividualToRequest(savedRequest.getId(), applicationRequest.getRequesters());
+            repository.isRequestViable(savedRequest.getId());
             repository.assignBenefitToRequest(savedRequest.getId());
             return savedRequest.getId();
         } catch (Exception e) {

@@ -16,9 +16,8 @@ public interface BenefitApplicationRepository extends JpaRepository<BenefitAppli
     @Query(value = "SELECT b FROM BenefitApplication b")
     List<BenefitApplication> findAllApplications();
 
-    @Procedure("HOUSING_SUBSIDY.ASSIGN_BENEFIT_TO_REQUEST")
-    void assignBenefitToRequest(Long requestId);
-
+    @Procedure("HOUSING_SUBSIDY.IS_REQUEST_VIABLE")
+    void isRequestViable(Long requestId);
 
     @Query(value = "SELECT i.ID AS \"id\", i.FIRST_NAME AS \"firstName\", i.LAST_NAME AS \"lastName\", i.EMAIL AS \"email\", i.PHONE_NUMBER AS \"phoneNumber\",\n" +
             "\t\ti.IS_PROPERTY_OWNER AS \"isPropertyOwner\", i.HAS_HOUSING_SUBSIDY_FUND AS \"hasHousingSubsidyFund\", i.HAS_HOUSING_SUBSIDY_GOV AS \"hasHousingSubsidyGov\",i.HAS_INTEREST_SUBSIDY AS \"hasInterestSubsidy\"\n" +
@@ -27,4 +26,7 @@ public interface BenefitApplicationRepository extends JpaRepository<BenefitAppli
             "ON i.ID =br.INDIVIDUAL_ID)\n" +
             "WHERE br.BENEFIT_APPLICATION_ID =:applicationId", nativeQuery = true)
     List<RequesterDetailDTO> findRequesterByApplicationId(@Param("applicationId") Long applicationId);
+
+    @Procedure("HOUSING_SUBSIDY.ASSIGN_BENEFIT_TO_REQUEST")
+    void assignBenefitToRequest(Long requestId);
 }
