@@ -6,6 +6,7 @@ import com.aaurzola.housingbenefit.exception.ApplicationSubmissionException;
 import com.aaurzola.housingbenefit.model.BenefitApplication;
 import com.aaurzola.housingbenefit.repository.BenefitApplicationRepository;
 import com.aaurzola.housingbenefit.repository.RequestorJDBC;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class BenefitApplicationServiceImp implements BenefitApplicationService{
     }
 
     @Override
+    @Transactional
     public Long submitApplication(ApplicationRequestDTO applicationRequest) {
         //validate person id
         try {
