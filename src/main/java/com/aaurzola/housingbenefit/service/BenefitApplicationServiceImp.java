@@ -35,7 +35,6 @@ public class BenefitApplicationServiceImp implements BenefitApplicationService{
     }
 
     @Override
-    @Transactional
     public Long submitApplication(ApplicationRequestDTO applicationRequest) {
         //validate person id
         try {
