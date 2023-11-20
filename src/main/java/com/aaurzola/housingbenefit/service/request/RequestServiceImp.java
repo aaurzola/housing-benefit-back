@@ -1,4 +1,4 @@
-package com.aaurzola.housingbenefit.service;
+package com.aaurzola.housingbenefit.service.request;
 
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.RequestDTO;
