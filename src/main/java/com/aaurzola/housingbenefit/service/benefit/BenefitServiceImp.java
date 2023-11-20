@@ -1,6 +1,5 @@
 package com.aaurzola.housingbenefit.service.benefit;
 
-import com.aaurzola.housingbenefit.exception.ResourceNotFoundException;
 import com.aaurzola.housingbenefit.model.Benefit;
 import com.aaurzola.housingbenefit.repository.BenefitRepository;
 import com.aaurzola.housingbenefit.validation.RequestValidator;
