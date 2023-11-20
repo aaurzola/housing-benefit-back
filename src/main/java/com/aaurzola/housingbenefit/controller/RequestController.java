@@ -2,7 +2,6 @@ package com.aaurzola.housingbenefit.controller;
 
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.RequestDTO;
-import com.aaurzola.housingbenefit.exception.ResourceNotFoundException;
 import com.aaurzola.housingbenefit.model.Request;
 import com.aaurzola.housingbenefit.service.request.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
