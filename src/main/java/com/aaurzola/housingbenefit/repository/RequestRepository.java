@@ -1,7 +1,7 @@
 package com.aaurzola.housingbenefit.repository;
 
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
-import com.aaurzola.housingbenefit.model.BenefitApplication;
+import com.aaurzola.housingbenefit.model.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BenefitApplicationRepository extends JpaRepository<BenefitApplication, Long> {
+public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    @Query(value = "SELECT b FROM BenefitApplication b")
-    List<BenefitApplication> findAllApplications();
+    @Query(value = "SELECT r FROM Request r")
+    List<Request> findAllRequests();
 
     @Procedure("HOUSING_SUBSIDY.IS_REQUEST_VIABLE")
     void isRequestViable(Long requestId);
@@ -24,8 +24,8 @@ public interface BenefitApplicationRepository extends JpaRepository<BenefitAppli
             "FROM (APP_SUBSIDIOS_VIVIENDA.BENEFIT_REQUESTOR br\n" +
             "JOIN APP_SUBSIDIOS_VIVIENDA.INDIVIDUAL i \n" +
             "ON i.ID =br.INDIVIDUAL_ID)\n" +
-            "WHERE br.BENEFIT_APPLICATION_ID =:applicationId", nativeQuery = true)
-    List<RequesterDetailDTO> findRequesterByApplicationId(@Param("applicationId") Long applicationId);
+            "WHERE br.BENEFIT_APPLICATION_ID =:requestId", nativeQuery = true)
+    List<RequesterDetailDTO> findRequesterByRequestId(@Param("requestId") Long requestId);
 
     @Procedure("HOUSING_SUBSIDY.ASSIGN_BENEFIT_TO_REQUEST")
     void assignBenefitToRequest(Long requestId);

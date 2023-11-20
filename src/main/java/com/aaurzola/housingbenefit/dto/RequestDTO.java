@@ -1,6 +1,6 @@
 package com.aaurzola.housingbenefit.dto;
 
-import com.aaurzola.housingbenefit.model.BenefitApplication;
+import com.aaurzola.housingbenefit.model.Request;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ApplicationRequestDTO {
-    private BenefitApplication application;
+public class RequestDTO {
+    private Request application;
     private List<Long> requesters;
 }

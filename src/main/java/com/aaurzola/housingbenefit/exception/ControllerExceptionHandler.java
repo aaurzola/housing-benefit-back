@@ -13,8 +13,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler(ApplicationSubmissionException.class)
-    public ResponseEntity<String> ApplicationSubmissionException(ApplicationSubmissionException ex) {
+    @ExceptionHandler(RequestSubmissionException.class)
+    public ResponseEntity<String> ApplicationSubmissionException(RequestSubmissionException ex) {
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
 
     }
