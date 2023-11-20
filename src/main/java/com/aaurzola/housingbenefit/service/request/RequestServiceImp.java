@@ -3,6 +3,7 @@ package com.aaurzola.housingbenefit.service.request;
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.RequestDTO;
 import com.aaurzola.housingbenefit.exception.RequestSubmissionException;
+import com.aaurzola.housingbenefit.exception.ResourceNotFoundException;
 import com.aaurzola.housingbenefit.model.Request;
 import com.aaurzola.housingbenefit.repository.RequestRepository;
 import com.aaurzola.housingbenefit.repository.RequestorJDBC;
@@ -36,8 +37,7 @@ public class RequestServiceImp implements RequestService {
 
     @Override
     public Request getRequestById(Long requestId) {
-        requestValidator.assertRequestIdExists(requestId);
-        return repository.findById(requestId).orElse(null);
+        return repository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Solicitud", requestId));
     }
 
     @Override

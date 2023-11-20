@@ -29,15 +29,9 @@ public class RequestController {
         return ResponseEntity.ok(service.getAllRequests());
     }
 
-    //TODO: Refact method
     @GetMapping("{requestId}")
     public ResponseEntity<Request> getApplicationById(@PathVariable Long requestId) {
-        Request request = service.getRequestById(requestId);
-        if (request != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(request);
-        } else {
-            throw new ResourceNotFoundException("Solicitud", requestId);
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(service.getRequestById(requestId));
     }
 
     @GetMapping("requesterDetails/{requestId}")
