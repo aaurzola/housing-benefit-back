@@ -12,5 +12,6 @@ public interface RequestService {
     Request getRequestById(Long requestId);
     Long submitRequest(RequestDTO requestDTO);
     List<RequesterDetailDTO> getRequester(Long requestId);
-
+    String approveRequest(Long requestId);
+    String rejectRequest(Long requestId);
 }

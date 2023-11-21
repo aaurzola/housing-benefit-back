@@ -29,4 +29,10 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     @Procedure("HOUSING_SUBSIDY.ASSIGN_BENEFIT_TO_REQUEST")
     void assignBenefitToRequest(Long requestId);
+
+    @Procedure("HOUSING_SUBSIDY.APPROVE_REQUEST")
+    void approveRequest(Long requestId);
+
+    @Procedure("HOUSING_SUBSIDY.REJECT_REQUEST")
+    void rejectRequest(Long requestId);
 }

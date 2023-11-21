@@ -42,4 +42,14 @@ public class RequestController {
     public ResponseEntity<Long> submitApplication(@RequestBody RequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.submitRequest(request));
     }
+
+    @PostMapping("approvals/{requestId}")
+    public ResponseEntity<String> approveRequest(@PathVariable Long requestId) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.approveRequest(requestId));
+    }
+
+    @PostMapping("rejections/{requestId}")
+    public ResponseEntity<String> rejectRequest(@PathVariable Long requestId) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.rejectRequest(requestId));
+    }
 }

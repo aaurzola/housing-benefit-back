@@ -2,6 +2,7 @@ package com.aaurzola.housingbenefit.service.request;
 
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.RequestDTO;
+import com.aaurzola.housingbenefit.exception.ApprovalException;
 import com.aaurzola.housingbenefit.exception.RequestSubmissionException;
 import com.aaurzola.housingbenefit.exception.ResourceNotFoundException;
 import com.aaurzola.housingbenefit.model.Request;
@@ -61,6 +62,28 @@ public class RequestServiceImp implements RequestService {
     public List<RequesterDetailDTO> getRequester(Long requestId) {
         requestValidator.assertRequestIdExists(requestId);
         return repository.findRequesterByRequestId(requestId);
+    }
+
+    @Override
+    public String approveRequest(Long requestId) {
+        requestValidator.assertRequestIdExists(requestId);
+        try {
+            repository.approveRequest(requestId);
+            return "Solicitud " + requestId + " ha sido aprobada satisfactoriamente";
+        } catch (Exception e) {
+            throw new ApprovalException();
+        }
+    }
+
+    @Override
+    public String rejectRequest(Long requestId) {
+        requestValidator.assertRequestIdExists(requestId);
+        try {
+            repository.rejectRequest(requestId);
+            return "Solicitud " + requestId + " ha sido rechazada satisfactoriamente";
+        } catch (Exception e) {
+            throw new ApprovalException();
+        }
     }
 
 }
