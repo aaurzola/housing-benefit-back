@@ -16,7 +16,11 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(RequestSubmissionException.class)
     public ResponseEntity<String> ApplicationSubmissionException(RequestSubmissionException ex) {
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
+    }
 
+    @ExceptionHandler(EmptyRequesterIdException.class)
+    public ResponseEntity<String> EmptyRequesterIdException(EmptyRequesterIdException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
 

@@ -42,6 +42,7 @@ public class RequestServiceImp implements RequestService {
 
     @Override
     public Long submitRequest(RequestDTO requestDTO) {
+        individualValidator.assertRequestersNotEmpty(requestDTO.getRequesters());
         for (Long individualId : requestDTO.getRequesters()) {
             individualValidator.assertIndividualExists(individualId);
         }
