@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -16,9 +17,6 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     @Query(value = "SELECT r FROM Request r")
     List<Request> findAllRequests();
 
-    @Procedure("HOUSING_SUBSIDY.IS_REQUEST_VIABLE")
-    void isRequestViable(Long requestId);
-
     @Query(value = "SELECT i.ID AS \"id\", i.FIRST_NAME AS \"firstName\", i.LAST_NAME AS \"lastName\", i.EMAIL AS \"email\", i.PHONE_NUMBER AS \"phoneNumber\",\n" +
             "\t\ti.IS_PROPERTY_OWNER AS \"isPropertyOwner\", i.HAS_HOUSING_SUBSIDY_FUND AS \"hasHousingSubsidyFund\", i.HAS_HOUSING_SUBSIDY_GOV AS \"hasHousingSubsidyGov\",i.HAS_INTEREST_SUBSIDY AS \"hasInterestSubsidy\"\n" +
             "FROM (APP_SUBSIDIOS_VIVIENDA.BENEFIT_REQUESTOR br\n" +
@@ -26,6 +24,11 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
             "ON i.ID =br.INDIVIDUAL_ID)\n" +
             "WHERE br.BENEFIT_APPLICATION_ID =:requestId", nativeQuery = true)
     List<RequesterDetailDTO> findRequesterByRequestId(@Param("requestId") Long requestId);
+
+    List<Request> findAllByHousingTypeAndCreatedAtBetween(String housingType, Date createdAtStart, Date createdAtEnd);
+
+    @Procedure("HOUSING_SUBSIDY.IS_REQUEST_VIABLE")
+    void isRequestViable(Long requestId);
 
     @Procedure("HOUSING_SUBSIDY.ASSIGN_BENEFIT_TO_REQUEST")
     void assignBenefitToRequest(Long requestId);
