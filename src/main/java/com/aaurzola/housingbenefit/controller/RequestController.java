@@ -52,4 +52,9 @@ public class RequestController {
     public ResponseEntity<String> rejectRequest(@PathVariable Long requestId) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.rejectRequest(requestId));
     }
+
+    @DeleteMapping("rejectedRequest")
+    public ResponseEntity<String> deleteAllRejectedRequests() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.deleteRejectedRequests());
+    }
 }

@@ -14,4 +14,5 @@ public interface RequestService {
     List<RequesterDetailDTO> getRequester(Long requestId);
     String approveRequest(Long requestId);
     String rejectRequest(Long requestId);
+    String deleteRejectedRequests();
 }

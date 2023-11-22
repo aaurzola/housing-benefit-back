@@ -35,4 +35,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     @Procedure("HOUSING_SUBSIDY.REJECT_REQUEST")
     void rejectRequest(Long requestId);
+
+    @Procedure("HOUSING_SUBSIDY.DELETE_REJECTED_REQUEST")
+    void deleteAllRejectedRequest();
 }

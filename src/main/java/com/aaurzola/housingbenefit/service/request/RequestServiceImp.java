@@ -86,4 +86,10 @@ public class RequestServiceImp implements RequestService {
         }
     }
 
+    @Override
+    public String deleteRejectedRequests() {
+        repository.deleteAllRejectedRequest();
+        return "Todas las solicitudes 'No aprobadas' fueron eliminadas de la base de datos";
+    }
+
 }
