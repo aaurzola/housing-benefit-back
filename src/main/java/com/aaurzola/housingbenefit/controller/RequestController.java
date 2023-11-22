@@ -1,5 +1,6 @@
 package com.aaurzola.housingbenefit.controller;
 
+import com.aaurzola.housingbenefit.dto.MessagePayload;
 import com.aaurzola.housingbenefit.dto.RequesterDetailDTO;
 import com.aaurzola.housingbenefit.dto.RequestDTO;
 import com.aaurzola.housingbenefit.model.Request;
@@ -44,17 +45,17 @@ public class RequestController {
     }
 
     @PostMapping("approvals/{requestId}")
-    public ResponseEntity<String> approveRequest(@PathVariable Long requestId) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.approveRequest(requestId));
+    public ResponseEntity<MessagePayload> approveRequest(@PathVariable Long requestId) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new MessagePayload(service.approveRequest(requestId)));
     }
 
     @PostMapping("rejections/{requestId}")
-    public ResponseEntity<String> rejectRequest(@PathVariable Long requestId) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.rejectRequest(requestId));
+    public ResponseEntity<MessagePayload> rejectRequest(@PathVariable Long requestId) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new MessagePayload(service.rejectRequest(requestId)));
     }
 
     @DeleteMapping("rejectedRequest")
-    public ResponseEntity<String> deleteAllRejectedRequests() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.deleteRejectedRequests());
+    public ResponseEntity<MessagePayload> deleteAllRejectedRequests() {
+        return ResponseEntity.status(HttpStatus.OK).body(new MessagePayload(service.deleteRejectedRequests()));
     }
 }
