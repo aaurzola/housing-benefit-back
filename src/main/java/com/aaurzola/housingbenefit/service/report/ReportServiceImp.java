@@ -27,7 +27,6 @@ public class ReportServiceImp implements ReportService {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("reporte_beneficio_vivienda");
 
-        // Create a CellStyle for the date column
         CellStyle dateStyle = workbook.createCellStyle();
         CreationHelper createHelper = workbook.getCreationHelper();
         dateStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
