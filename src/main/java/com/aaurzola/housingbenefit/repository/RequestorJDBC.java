@@ -21,6 +21,11 @@ public class RequestorJDBC {
     private String password;
 
 
+    /**
+     * Calls a Store Procedure that assigns an individual id to a request
+     * @param applicationId
+     * @param requesters
+     */
     public void assignIndividualToRequest(Long applicationId, List<Long> requesters) {
         try (
                 Connection conn = DriverManager.getConnection(databasebUrl, user, password);
