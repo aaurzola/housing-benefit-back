@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    @Query(value = "SELECT r FROM Request r")
+    @Query(value = "SELECT r FROM Request r ORDER BY r.createdAt DESC")
     List<Request> findAllRequests();
 
     @Query(value = "SELECT i.ID AS \"id\", i.FIRST_NAME AS \"firstName\", i.LAST_NAME AS \"lastName\", i.EMAIL AS \"email\", i.PHONE_NUMBER AS \"phoneNumber\",\n" +
